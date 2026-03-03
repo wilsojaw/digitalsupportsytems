@@ -80,17 +80,16 @@ const CaseStudyiPad = () => {
         </div>
       </section>
 
-      {/* Hero Image Placeholder */}
+      {/* Hero Image */}
       <section className="pb-16">
         <div className="container mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-4xl mx-auto">
-            <div className="rounded-3xl bg-secondary overflow-hidden aspect-[16/7] flex items-center justify-center">
-              <div className="text-center p-8">
-                <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
-                  <TabletSmartphone className="h-6 w-6 text-muted-foreground" />
-                </div>
-                <p className="text-sm font-medium text-muted-foreground">Hero image coming soon</p>
-              </div>
+            <div className="rounded-3xl overflow-hidden aspect-[16/7]">
+              <img
+                src="/images/ipad-scheduler.png"
+                alt="iPad Classroom Scheduler wall-mounted display"
+                className="w-full h-full object-cover"
+              />
             </div>
           </motion.div>
         </div>

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
-import { ArrowLeft, ArrowRight, Check, Video, Camera, Mic, Monitor, Play } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Camera, Mic, Monitor } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -50,9 +49,6 @@ const impact = [
 ];
 
 const CaseStudyZoomRoom = () => {
-  const [videoSrc, setVideoSrc] = useState<string | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -80,17 +76,16 @@ const CaseStudyZoomRoom = () => {
         </div>
       </section>
 
-      {/* Hero Image Placeholder */}
+      {/* Hero Image */}
       <section className="pb-16">
         <div className="container mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-4xl mx-auto">
-            <div className="rounded-3xl bg-secondary overflow-hidden aspect-[16/7] flex items-center justify-center">
-              <div className="text-center p-8">
-                <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
-                  <Video className="h-6 w-6 text-muted-foreground" />
-                </div>
-                <p className="text-sm font-medium text-muted-foreground">Hero image coming soon</p>
-              </div>
+            <div className="rounded-3xl overflow-hidden aspect-[16/7]">
+              <img
+                src="/images/zoom-room.png"
+                alt="Zoom Room setup at Oakwood University Church"
+                className="w-full h-full object-cover"
+              />
             </div>
           </motion.div>
         </div>
@@ -213,33 +208,12 @@ const CaseStudyZoomRoom = () => {
               <h2 className="text-3xl font-bold tracking-tight mb-4">Video Demonstration</h2>
               <p className="text-muted-foreground text-lg mb-8">See the Zoom Room in action at Oakwood University Church.</p>
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl bg-secondary border border-border overflow-hidden aspect-video relative">
-              {videoSrc ? (
-                <video ref={videoRef} src={videoSrc} controls className="w-full h-full object-contain bg-black" autoPlay />
-              ) : (
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-8">
-                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Play className="h-8 w-8 text-primary ml-1" />
-                  </div>
-                  <div className="text-center">
-                    <p className="font-medium text-foreground mb-1">Video Demonstration</p>
-                    <p className="text-sm text-muted-foreground mb-6">Upload a video file to see it here</p>
-                    <label className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer">
-                      <Play className="h-4 w-4" />
-                      Upload Video
-                      <input
-                        type="file"
-                        accept="video/*"
-                        className="hidden"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (file) setVideoSrc(URL.createObjectURL(file));
-                        }}
-                      />
-                    </label>
-                  </div>
-                </div>
-              )}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl overflow-hidden aspect-video bg-black">
+              <video
+                controls
+                className="w-full h-full object-contain"
+                src="/images/ouc-zoom-project.mp4"
+              />
             </motion.div>
             <p className="text-xs text-muted-foreground text-center mt-3">Oakwood University Church Zoom Room Demonstration</p>
           </div>

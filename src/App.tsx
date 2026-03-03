@@ -10,6 +10,8 @@ import CaseStudyJenzabar from "./pages/CaseStudyJenzabar";
 import CaseStudyiPad from "./pages/CaseStudyiPad";
 import CaseStudyZoomRoom from "./pages/CaseStudyZoomRoom";
 import AccessControl from "./pages/AccessControl";
+import ITInfrastructure from "./pages/ITInfrastructure";
+import VideoSurveillance from "./pages/VideoSurveillance";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +30,8 @@ const App = () => (
           <Route path="/case-studies/ipad-classroom-scheduler" element={<CaseStudyiPad />} />
           <Route path="/case-studies/alexa-zoom-room" element={<CaseStudyZoomRoom />} />
           <Route path="/access-control" element={<AccessControl />} />
+          <Route path="/it-infrastructure" element={<ITInfrastructure />} />
+          <Route path="/video-surveillance" element={<VideoSurveillance />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

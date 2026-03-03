@@ -5,10 +5,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 const navLinks = [
   { label: "Services", href: "/#services" },
-  { label: "Why Us", href: "/#why-us" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Access Control", href: "/access-control" },
-  { label: "Industries", href: "/#industries" },
+  { label: "IT Infrastructure", href: "/it-infrastructure" },
+  { label: "Video Surveillance", href: "/video-surveillance" },
   { label: "Contact", href: "/#contact" },
 ];
 

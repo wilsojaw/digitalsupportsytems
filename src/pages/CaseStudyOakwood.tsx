@@ -17,12 +17,12 @@ const objectives = [
   "Hardened network with enterprise cybersecurity",
 ];
 
-const photoPlaceholders = [
-  { alt: "Automated sliding doors at the entrance", label: "Entry & Access Control" },
-  { alt: "Modern foyer with technology integration", label: "Foyer" },
-  { alt: "Science lab with smart classroom setup", label: "Science Lab" },
-  { alt: "Classroom display and scheduling technology", label: "Classroom Tech" },
-  { alt: "Dedication plaque for the building", label: "Dedication" },
+const photos = [
+  { src: "/images/OAA_SlidingDoor.jpeg", alt: "Automated sliding doors at the entrance", label: "Entry & Access Control" },
+  { src: "/images/OAA_Foyer.jpeg", alt: "Modern foyer with technology integration", label: "Foyer" },
+  { src: "/images/OAA_ScienceLab.jpeg", alt: "Science lab with smart classroom setup", label: "Science Lab" },
+  { src: "/images/OAA_ClassroomDisplay.jpeg", alt: "Classroom display and scheduling technology", label: "Classroom Tech" },
+  { src: "/images/oaa_plaque.jpeg", alt: "Dedication plaque for the building", label: "Dedication" },
 ];
 
 const CaseStudyOakwood = () => {
@@ -72,33 +72,62 @@ const CaseStudyOakwood = () => {
       {/* Photo Gallery Placeholder */}
       <section ref={parallaxRef} className="pb-20 overflow-hidden">
         <div className="container mx-auto px-6">
-          <motion.div
-            style={{ y }}
-            className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4"
-          >
-            {photoPlaceholders.map((photo, i) => (
-              <motion.div
-                key={photo.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className={`relative rounded-2xl bg-secondary overflow-hidden ${
-                  i === 0 ? "col-span-2 row-span-2 aspect-[4/3]" : "aspect-square"
-                }`}
-              >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center p-4">
-                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mx-auto mb-3">
-                      <span className="text-muted-foreground text-lg font-semibold">{i + 1}</span>
-                    </div>
-                    <p className="text-sm font-medium text-muted-foreground">{photo.label}</p>
-                    <p className="text-xs text-muted-foreground/60 mt-1">Photo coming soon</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <motion.div style={{ y }} className="flex flex-col gap-3 sm:gap-4">
+            {/* Featured photo — full width */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="rounded-2xl overflow-hidden aspect-[21/9]"
+            >
+              <img src={photos[0].src} alt={photos[0].alt} className="w-full h-full object-cover" />
+            </motion.div>
+
+            {/* 2×2 grid of remaining photos */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {photos.slice(1).map((photo, i) => (
+                <motion.div
+                  key={photo.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: (i + 1) * 0.1, duration: 0.5 }}
+                  className="rounded-2xl overflow-hidden aspect-[4/3]"
+                >
+                  <img src={photo.src} alt={photo.alt} className="w-full h-full object-cover" />
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Video Section */}
+      <section className="pb-24">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl font-bold tracking-tight mb-4">Wiring Annotation Scheme</h2>
+              <p className="text-muted-foreground text-lg mb-8">An overview of the structured cabling and wiring layout for the facility.</p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="rounded-3xl overflow-hidden aspect-video bg-black"
+            >
+              <video
+                controls
+                className="w-full h-full object-contain"
+                src="/images/WiringAnnotationScheme.mp4"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 

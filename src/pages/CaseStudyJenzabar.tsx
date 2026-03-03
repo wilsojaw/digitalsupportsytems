@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
-import { ArrowLeft, ArrowRight, Check, Play, Database, Server, Phone, FileSpreadsheet } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Database, Server, Phone, FileSpreadsheet } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -30,9 +29,6 @@ const architecture = [
 ];
 
 const CaseStudyJenzabar = () => {
-  const [videoSrc, setVideoSrc] = useState<string | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -69,7 +65,7 @@ const CaseStudyJenzabar = () => {
         </div>
       </section>
 
-      {/* Hero Image Placeholder */}
+      {/* Hero Image */}
       <section className="pb-16">
         <div className="container mx-auto px-6">
           <motion.div
@@ -78,13 +74,12 @@ const CaseStudyJenzabar = () => {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <div className="rounded-3xl bg-secondary overflow-hidden aspect-[16/7] flex items-center justify-center">
-              <div className="text-center p-8">
-                <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
-                  <Database className="h-6 w-6 text-muted-foreground" />
-                </div>
-                <p className="text-sm font-medium text-muted-foreground">Hero image coming soon</p>
-              </div>
+            <div className="rounded-3xl overflow-hidden aspect-[16/7]">
+              <img
+                src="/images/jen.png"
+                alt="Jenzabar Application Data Integration system overview"
+                className="w-full h-full object-cover"
+              />
             </div>
           </motion.div>
         </div>
@@ -204,45 +199,13 @@ const CaseStudyJenzabar = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="rounded-3xl bg-secondary border border-border overflow-hidden aspect-video relative"
+              className="rounded-3xl overflow-hidden aspect-video bg-black"
             >
-              {videoSrc ? (
-                <video
-                  ref={videoRef}
-                  src={videoSrc}
-                  controls
-                  className="w-full h-full object-contain bg-black"
-                  autoPlay
-                />
-              ) : (
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-8">
-                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Play className="h-8 w-8 text-primary ml-1" />
-                  </div>
-                  <div className="text-center">
-                    <p className="font-medium text-foreground mb-1">Video Overview</p>
-                    <p className="text-sm text-muted-foreground mb-6">
-                      Upload a video file to see it here
-                    </p>
-                    <label className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer">
-                      <Play className="h-4 w-4" />
-                      Upload Video
-                      <input
-                        type="file"
-                        accept="video/*"
-                        className="hidden"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (file) {
-                            const url = URL.createObjectURL(file);
-                            setVideoSrc(url);
-                          }
-                        }}
-                      />
-                    </label>
-                  </div>
-                </div>
-              )}
+              <video
+                controls
+                className="w-full h-full object-contain"
+                src="/images/WhatIsJADI_RevA.mp4"
+              />
             </motion.div>
             <p className="text-xs text-muted-foreground text-center mt-3">
               Video overview of the JADI system architecture and workflow.
