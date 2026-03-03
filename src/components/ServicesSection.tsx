@@ -1,49 +1,47 @@
 import { motion } from "framer-motion";
-import { Shield, Network, Headphones, ArrowRight } from "lucide-react";
+import { Lock, Server, Headphones } from "lucide-react";
 
 const services = [
   {
-    icon: Shield,
+    icon: Lock,
     title: "Access Control",
-    subtitle: "Allegion / ISONAS",
     description:
-      "Network-native door control, architecture, deployment, and lifecycle support.",
+      "Know who's coming and going — from a single door to an entire campus. We install smart, network-based systems that are easy to manage and grow with you.",
   },
   {
-    icon: Network,
-    title: "IT Infrastructure Design",
-    subtitle: "End-to-End",
+    icon: Server,
+    title: "IT Infrastructure",
     description:
-      "Network, cabling, fiber, server/cloud integration—engineered for performance and scale.",
+      "Fast, reliable networks built right. From cabling and Wi-Fi to servers and cloud — everything designed to keep your operations running smoothly.",
   },
   {
     icon: Headphones,
-    title: "Integration & Support",
-    subtitle: "Ongoing",
+    title: "Ongoing Support",
     description:
-      "Practical integration and ongoing support so systems remain dependable long-term.",
+      "We don't disappear after installation. Our team stays with you to make sure everything keeps working — and evolves as your needs change.",
   },
 ];
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="py-24">
+    <section id="services" className="py-32">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <p className="text-primary text-sm font-medium uppercase tracking-wide mb-3">
-            What We Do
-          </p>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold">
-            Our Core Services
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-5">
+            Everything you need.{" "}
+            <span className="text-muted-foreground">Nothing you don't.</span>
           </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Three core services, delivered with precision.
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
@@ -51,23 +49,17 @@ const ServicesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className="group glass-card glow-border rounded-xl p-8 transition-all duration-300 hover:-translate-y-1"
+              className="group rounded-2xl bg-card p-10 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
             >
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                <service.icon className="h-6 w-6 text-primary" />
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-8">
+                <service.icon className="h-7 w-7 text-primary" />
               </div>
-              <p className="text-xs text-primary font-medium uppercase tracking-wide mb-1">
-                {service.subtitle}
-              </p>
-              <h3 className="font-display text-xl font-semibold mb-3">
+              <h3 className="text-xl font-semibold mb-4 tracking-tight">
                 {service.title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed mb-6">
+              <p className="text-muted-foreground leading-relaxed">
                 {service.description}
               </p>
-              <span className="inline-flex items-center gap-1 text-sm text-primary font-medium group-hover:gap-2 transition-all">
-                Learn more <ArrowRight className="h-4 w-4" />
-              </span>
             </motion.div>
           ))}
         </div>
