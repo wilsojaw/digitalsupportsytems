@@ -1,13 +1,31 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Why Us", href: "#why-us" },
-  { label: "Industries", href: "#industries" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/#services" },
+  { label: "Why Us", href: "/#why-us" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Industries", href: "/#industries" },
+  { label: "Contact", href: "/#contact" },
 ];
+
+const NavItem = ({ link, className, onClick }: { link: typeof navLinks[0]; className?: string; onClick?: () => void }) => {
+  const isRoute = !link.href.includes("#");
+  if (isRoute) {
+    return (
+      <Link to={link.href} className={className} onClick={onClick}>
+        {link.label}
+      </Link>
+    );
+  }
+  return (
+    <a href={link.href} className={className} onClick={onClick}>
+      {link.label}
+    </a>
+  );
+};
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -20,24 +38,22 @@ const Navbar = () => {
       className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border"
     >
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
-        <a href="#" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <span className="text-lg font-semibold tracking-tight text-foreground">
             Digital Support Systems
           </span>
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <NavItem
               key={link.label}
-              href={link.href}
+              link={link}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
-            >
-              {link.label}
-            </a>
+            />
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             className="rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-all duration-200"
           >
             Get Started
@@ -62,17 +78,15 @@ const Navbar = () => {
           >
             <div className="flex flex-col gap-4 px-6 py-6">
               {navLinks.map((link) => (
-                <a
+                <NavItem
                   key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  link={link}
                   className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {link.label}
-                </a>
+                  onClick={() => setMobileOpen(false)}
+                />
               ))}
               <a
-                href="#contact"
+                href="/#contact"
                 onClick={() => setMobileOpen(false)}
                 className="rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground text-center"
               >
