@@ -27,6 +27,7 @@ const caseStudies = [
     outcome: "Faster workflows, fewer errors, and data that actually stays in sync.",
     tags: ["Data Integration", "Higher Education", "Custom Software"],
     gradient: "from-violet-500/20 to-purple-500/20",
+    slug: "/case-studies/jenzabar-data-interface",
   },
   {
     icon: TabletSmartphone,
