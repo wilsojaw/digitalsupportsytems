@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowRight, GraduationCap, Database, TabletSmartphone, Video } from "lucide-react";
@@ -14,6 +15,7 @@ const caseStudies = [
     outcome: "A model for what modern educational infrastructure can look like.",
     tags: ["Building Automation", "Fiber Optics", "Smart Classrooms"],
     gradient: "from-blue-500/20 to-cyan-500/20",
+    slug: "/case-studies/oakwood-adventist-academy",
   },
   {
     icon: Database,
@@ -122,16 +124,27 @@ const CaseStudies = () => {
                     </div>
                   </div>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {study.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 rounded-full text-xs font-medium bg-secondary text-secondary-foreground"
+                  {/* Tags & Link */}
+                  <div className="flex items-center justify-between flex-wrap gap-4">
+                    <div className="flex flex-wrap gap-2">
+                      {study.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 rounded-full text-xs font-medium bg-secondary text-secondary-foreground"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    {study.slug && (
+                      <Link
+                        to={study.slug}
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
                       >
-                        {tag}
-                      </span>
-                    ))}
+                        View Case Study
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    )}
                   </div>
                 </div>
               </motion.div>
