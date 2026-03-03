@@ -51,6 +51,7 @@ const caseStudies = [
     outcome: "One-touch meetings with studio-grade quality. Hybrid collaboration, perfected.",
     tags: ["AV Integration", "Zoom Rooms", "Voice Control"],
     gradient: "from-orange-500/20 to-amber-500/20",
+    slug: "/case-studies/alexa-zoom-room",
   },
 ];
 
