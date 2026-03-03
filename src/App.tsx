@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyOakwood from "./pages/CaseStudyOakwood";
+import AccessControl from "./pages/AccessControl";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/case-studies/oakwood-adventist-academy" element={<CaseStudyOakwood />} />
+          <Route path="/access-control" element={<AccessControl />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
