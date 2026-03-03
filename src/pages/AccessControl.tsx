@@ -1,222 +1,313 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { Shield, Lock, Smartphone, Cloud, ArrowRight, CheckCircle2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const Building = ({ rooms = 0, ext = 0, dbl = 0 }: { rooms?: number; ext?: number; dbl?: number }) => (
-    <svg viewBox="0 0 280 195" width="260" height="180">
-        <rect x="10" y="170" width="260" height="5" rx="2" fill="#1e3a5f" opacity="0.4" />
-        <rect x="40" y="58" width="200" height="114" rx="4" fill="#0b1e35" stroke="#1e5aaa" strokeWidth="1.5" />
-        <polygon points="28,58 140,16 252,58" fill="#07152a" stroke="#1e5aaa" strokeWidth="1.5" />
-        {[0, 1, 2].map((i) => (
-            <g key={i}>
-                <rect x={60 + i * 60} y="76" width="34" height="26" rx="2" fill={rooms > i ? "#00ccff" : "#071828"} stroke={rooms > i ? "#00aaee" : "#1e3050"} strokeWidth="1" opacity={rooms > i ? 0.85 : 0.35} />
-                <rect x={60 + i * 60} y="116" width="34" height="26" rx="2" fill={rooms > i + 3 ? "#00ccff" : "#071828"} stroke={rooms > i + 3 ? "#00aaee" : "#1e3050"} strokeWidth="1" opacity={rooms > i + 3 ? 0.85 : 0.35} />
-            </g>
-        ))}
-        {rooms > 0 && [0, 1, 2].slice(0, Math.min(rooms, 3)).map((i) => (
-            <rect key={i} x={91 + i * 60} y="82" width="6" height="14" rx="1" fill="#00ff80" opacity="0.9" />
-        ))}
-        <rect x="110" y="136" width={dbl > 0 ? 60 : 30} height="36" rx="2" fill={ext > 0 ? "#ff5a20" : "#071828"} stroke={ext > 0 ? "#ff7a45" : "#1e3050"} strokeWidth="1.5" />
-        {dbl > 0 && <line x1="140" y1="136" x2="140" y2="172" stroke="#07152a" strokeWidth="2" />}
-        {ext > 0 && <circle cx={dbl > 0 ? 162 : 128} cy="154" r="3" fill="#fff" opacity="0.7" />}
-        <circle cx="224" cy="32" r="3.5" fill="#00ccff" opacity="0.85" />
-        <path d="M224 28 Q235 21 246 28" stroke="#00ccff" strokeWidth="1.5" fill="none" opacity="0.55" />
-        <path d="M224 28 Q213 21 202 28" stroke="#00ccff" strokeWidth="1.5" fill="none" opacity="0.55" />
-    </svg>
-);
-
-const Person = ({ pulse }: { pulse: boolean }) => (
-    <svg viewBox="0 0 80 118" width="76" height="112" style={{ filter: "drop-shadow(0 4px 14px rgba(0,200,255,0.3))", transition: "transform 0.5s", transform: pulse ? "translateY(-5px)" : "translateY(0)" }}>
-        <ellipse cx="40" cy="106" rx="21" ry="5.5" fill="#00ccff" opacity="0.12" />
-        <rect x="22" y="57" width="36" height="43" rx="8" fill="#0e4470" stroke="#00ccff" strokeWidth="1.5" />
-        <rect x="33" y="61" width="14" height="9" rx="2" fill="#00aadd" opacity="0.35" />
-        <circle cx="40" cy="40" r="17" fill="#0e4470" stroke="#00ccff" strokeWidth="1.5" />
-        <circle cx="34" cy="38" r="2.5" fill="#00ccff" opacity="0.85" />
-        <circle cx="46" cy="38" r="2.5" fill="#00ccff" opacity="0.85" />
-        <path d="M34 48 Q40 53 46 48" stroke="#00ccff" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-        <rect x="8" y="60" width="14" height="8" rx="4" fill="#0e4470" stroke="#00ccff" strokeWidth="1" />
-        <rect x="58" y="60" width="14" height="8" rx="4" fill="#0e4470" stroke="#00ccff" strokeWidth="1" />
-        <rect x="24" y="97" width="11" height="15" rx="4" fill="#091f38" stroke="#1e4a80" strokeWidth="1" />
-        <rect x="45" y="97" width="11" height="15" rx="4" fill="#091f38" stroke="#1e4a80" strokeWidth="1" />
-    </svg>
-);
-
-const Row = ({ icon, label, detail, hi }: { icon: string; label: string; detail: string; hi: boolean }) => (
-    <div style={{ display: "flex", gap: "11px", alignItems: "flex-start", padding: "12px 14px", marginBottom: "8px", background: hi ? "rgba(0,200,255,0.065)" : "rgba(255,255,255,0.022)", border: `1px solid ${hi ? "rgba(0,200,255,0.22)" : "rgba(255,255,255,0.06)"}`, borderRadius: "9px" }}>
-        <span style={{ fontSize: "17px", marginTop: "1px", flexShrink: 0 }}>{icon}</span>
-        <div>
-            <div style={{ color: hi ? "#00ccff" : "#c8e0f8", fontWeight: 600, fontSize: "13px", marginBottom: "3px" }}>{label}</div>
-            <div style={{ color: "#4a6a88", fontSize: "11.5px", lineHeight: 1.55 }}>{detail}</div>
+/* ─── Intro Hero Section ─── */
+const AccessControlHero = () => (
+  <section className="relative pt-32 pb-20 overflow-hidden">
+    <div className="absolute top-20 right-[10%] w-[500px] h-[500px] rounded-full bg-primary/8 blur-[120px] pointer-events-none" />
+    <div className="container mx-auto px-6">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="max-w-3xl"
+      >
+        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary mb-6">
+          <Shield className="h-4 w-4" />
+          Access Control
         </div>
+        <h1 className="text-5xl sm:text-6xl font-bold leading-[1.08] tracking-tight mb-6">
+          Know who's coming in.{" "}
+          <span className="text-muted-foreground">Always.</span>
+        </h1>
+        <p className="text-xl text-muted-foreground leading-relaxed mb-8 font-light max-w-2xl">
+          Access control replaces traditional keys with smart, network-based card readers — giving you complete visibility and control over every door in your facility, from anywhere.
+        </p>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className="grid sm:grid-cols-3 gap-6 max-w-3xl mt-12"
+      >
+        {[
+          { icon: Lock, title: "Smart Locks", desc: "IP-based card readers at every door — no more lost keys or rekeying costs." },
+          { icon: Smartphone, title: "Mobile Credentials", desc: "Employees badge in with their phone. Grant or revoke access instantly." },
+          { icon: Cloud, title: "Cloud Managed", desc: "Monitor every door from a single dashboard. Full audit logs included." },
+        ].map((item, i) => (
+          <div key={i} className="rounded-2xl bg-card border border-border p-6">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+              <item.icon className="h-5 w-5 text-primary" />
+            </div>
+            <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </motion.div>
     </div>
+  </section>
 );
 
+/* ─── Estimator Components ─── */
+const Counter = ({ val, onChange }: { val: number; onChange: (v: number) => void }) => (
+  <div className="flex items-center justify-center gap-5 my-6">
+    <button
+      onClick={() => onChange(Math.max(1, val - 1))}
+      className="w-11 h-11 rounded-full border border-border bg-card text-foreground text-xl flex items-center justify-center hover:bg-muted transition-colors"
+    >
+      −
+    </button>
+    <span className="text-5xl font-bold text-foreground min-w-[64px] text-center tabular-nums">{val}</span>
+    <button
+      onClick={() => onChange(val + 1)}
+      className="w-11 h-11 rounded-full border border-border bg-card text-foreground text-xl flex items-center justify-center hover:bg-muted transition-colors"
+    >
+      +
+    </button>
+  </div>
+);
+
+const ResultRow = ({ icon, label, detail, highlighted }: { icon: string; label: string; detail: string; highlighted: boolean }) => (
+  <div className={`flex gap-3 items-start p-4 mb-2 rounded-xl border ${highlighted ? "bg-primary/5 border-primary/20" : "bg-card border-border"}`}>
+    <span className="text-lg mt-0.5 shrink-0">{icon}</span>
+    <div>
+      <div className={`font-semibold text-sm mb-1 ${highlighted ? "text-primary" : "text-foreground"}`}>{label}</div>
+      <div className="text-muted-foreground text-xs leading-relaxed">{detail}</div>
+    </div>
+  </div>
+);
+
+/* ─── Estimator Wizard ─── */
+const Estimator = () => {
+  const [step, setStep] = useState(0);
+  const [data, setData] = useState({
+    rooms: 1,
+    ext: null as boolean | null,
+    extN: 1,
+    dbl: null as boolean | null,
+    dblN: 1,
+  });
+
+  const go = (upd = {}, skip = 1) => {
+    setData((p) => ({ ...p, ...upd }));
+    setStep((s) => s + skip);
+  };
+
+  const r = data.rooms;
+  const extN = data.ext ? data.extN : 0;
+  const dblN = data.dbl ? data.dblN : 0;
+  const singles = Math.max(0, r - dblN);
+
+  const btnClass = "inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-all disabled:opacity-40 disabled:cursor-not-allowed";
+  const yesnoClass = "rounded-full border border-border px-8 py-3 text-sm font-medium text-foreground hover:bg-muted transition-colors";
+  const stepLabel = step < 6 ? `Step ${step + 1} of 6` : "Complete ✓";
+
+  const slides = [
+    /* 0 – Welcome */
+    <div key="w" className="text-center">
+      <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+        <Shield className="h-8 w-8 text-primary" />
+      </div>
+      <h2 className="text-2xl font-bold tracking-tight mb-3">Access Control Estimator</h2>
+      <p className="text-muted-foreground text-sm max-w-xs mx-auto mb-8 leading-relaxed">
+        Answer a few quick questions and we'll outline exactly what your facility needs.
+      </p>
+      <button onClick={() => go()} className={btnClass}>
+        Get Started <ArrowRight className="h-4 w-4" />
+      </button>
+    </div>,
+
+    /* 1 – Room count */
+    <div key="r" className="text-center">
+      <h2 className="text-lg font-semibold mb-2">How many rooms need card readers?</h2>
+      <p className="text-muted-foreground text-xs mb-2">Include every door that needs controlled access.</p>
+      <Counter val={r} onChange={(v) => setData((p) => ({ ...p, rooms: v }))} />
+      <button onClick={() => go()} disabled={r < 1} className={btnClass}>Next →</button>
+    </div>,
+
+    /* 2 – External doors? */
+    <div key="e" className="text-center">
+      <h2 className="text-lg font-semibold mb-2">Are any doors external?</h2>
+      <p className="text-muted-foreground text-xs mb-6">Doors that lead directly outside the building.</p>
+      <div className="flex gap-3 justify-center">
+        <button onClick={() => go({ ext: true })} className={yesnoClass}>Yes</button>
+        <button onClick={() => go({ ext: false, extN: 0 }, 2)} className={yesnoClass}>No</button>
+      </div>
+    </div>,
+
+    /* 3 – External count */
+    <div key="en" className="text-center">
+      <h2 className="text-lg font-semibold mb-2">How many external doors?</h2>
+      <p className="text-muted-foreground text-xs mb-2">Enter the number that lead directly outside.</p>
+      <Counter val={data.extN} onChange={(v) => setData((p) => ({ ...p, extN: v }))} />
+      <button onClick={() => go()} className={btnClass}>Next →</button>
+    </div>,
+
+    /* 4 – Double doors? */
+    <div key="d" className="text-center">
+      <h2 className="text-lg font-semibold mb-2">Are any doors double doors?</h2>
+      <p className="text-muted-foreground text-xs mb-6">Double doors need mag locks, motion sensors & REX sensors.</p>
+      <div className="flex gap-3 justify-center">
+        <button onClick={() => go({ dbl: true })} className={yesnoClass}>Yes</button>
+        <button onClick={() => go({ dbl: false, dblN: 0 }, 2)} className={yesnoClass}>No</button>
+      </div>
+    </div>,
+
+    /* 5 – Double door count */
+    <div key="dn" className="text-center">
+      <h2 className="text-lg font-semibold mb-2">How many double doors?</h2>
+      <p className="text-muted-foreground text-xs mb-2">Each set needs its own mag lock, motion sensor & REX.</p>
+      <Counter val={data.dblN} onChange={(v) => setData((p) => ({ ...p, dblN: v }))} />
+      <button onClick={() => go()} className={btnClass}>See My Results →</button>
+    </div>,
+
+    /* 6 – Results */
+    <div key="s">
+      <div className="text-center mb-6">
+        <h2 className="text-xl font-bold tracking-tight mb-4">Your Installation Needs</h2>
+        <div className="flex gap-3 justify-center flex-wrap">
+          {[
+            { l: "Card Readers", v: r },
+            { l: "External Doors", v: extN },
+            { l: "Double Doors", v: dblN },
+          ].map(({ l, v }) => (
+            <div key={l} className="bg-card border border-border rounded-xl px-4 py-3 text-center min-w-[90px]">
+              <div className="text-2xl font-bold text-foreground tabular-nums">{v}</div>
+              <div className="text-[10px] text-muted-foreground">{l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <ResultRow icon="🔌" highlighted label={`Ethernet Wiring — ${r} run${r !== 1 ? "s" : ""}`} detail="Cat6 ethernet from server room to each door location for IP-based card reader communication." />
+      <ResultRow icon="🪪" highlighted label={`Card Readers & Cables — ${r} unit${r !== 1 ? "s" : ""}`} detail="ISONAS IP card readers with installation hardware and cables at each secured door." />
+      {singles > 0 && <ResultRow icon="⚡" highlighted={false} label={`Electric Strikes — ${singles} unit${singles !== 1 ? "s" : ""}`} detail="Single doors require an electric strike for electronic locking and release." />}
+      {dblN > 0 && <ResultRow icon="🔒" highlighted={false} label={`Mag Locks + Motion + REX — ${dblN} set${dblN !== 1 ? "s" : ""}`} detail="Double doors require magnetic locks, overhead motion sensors, and Request-to-Exit sensors on both sides." />}
+      <ResultRow icon="☁️" highlighted label={`Cloud License — ${r} reader${r !== 1 ? "s" : ""}`} detail="Annual per-reader cloud license. Includes mobile credentials, remote management, and full audit logs." />
+      <ResultRow icon="🛠️" highlighted={false} label="Annual Maintenance (Optional)" detail="Covers preventive maintenance, firmware updates, and priority support." />
+
+      <div className="mt-6 p-5 bg-primary/5 border border-primary/15 rounded-2xl text-center">
+        <p className="text-muted-foreground text-xs mb-3">Ready for a formal quote based on your facility?</p>
+        <button className={`${btnClass} w-full justify-center`}>
+          Request a Custom Quote <ArrowRight className="h-4 w-4" />
+        </button>
+      </div>
+
+      <button
+        onClick={() => { setStep(0); setData({ rooms: 1, ext: null, extN: 1, dbl: null, dblN: 1 }); }}
+        className="w-full mt-3 py-2.5 text-xs text-muted-foreground hover:text-foreground border border-border rounded-full transition-colors"
+      >
+        ← Start Over
+      </button>
+    </div>,
+  ];
+
+  const cur = Math.min(step, slides.length - 1);
+  const prog = Math.min((step / (slides.length - 1)) * 100, 100);
+
+  return (
+    <section className="py-20">
+      <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+            See what you need.{" "}
+            <span className="text-muted-foreground">In 60 seconds.</span>
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Our estimator walks you through the specifics.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-md mx-auto"
+        >
+          <div className="bg-card border border-border rounded-3xl p-8 shadow-lg">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_6px_hsl(142_76%_46%)]" />
+                <span className="text-muted-foreground text-[11px] font-medium tracking-wider uppercase">Access Control</span>
+              </div>
+              <span className="text-muted-foreground text-[11px]">{stepLabel}</span>
+            </div>
+            <div className="h-1 bg-muted rounded-full mb-6">
+              <div
+                className="h-full bg-primary rounded-full transition-all duration-400 ease-out"
+                style={{ width: `${prog}%` }}
+              />
+            </div>
+            <div key={step} className="min-h-[280px] animate-in fade-in slide-in-from-bottom-2 duration-300">
+              {slides[cur]}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+/* ─── How It Works ─── */
+const HowItWorks = () => (
+  <section className="py-20 bg-muted/50">
+    <div className="container mx-auto px-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center mb-16"
+      >
+        <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+          How it works.
+        </h2>
+        <p className="text-lg text-muted-foreground">From consultation to cloud-managed security in four steps.</p>
+      </motion.div>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+        {[
+          { n: "01", title: "Site Assessment", desc: "We survey your facility to map every door, wiring path, and security requirement." },
+          { n: "02", title: "System Design", desc: "A custom plan with readers, locks, and network layout — tailored to your building." },
+          { n: "03", title: "Installation", desc: "Our team handles wiring, mounting, and configuration. Minimal disruption to your day." },
+          { n: "04", title: "Go Live", desc: "Cloud dashboard is activated, credentials are issued, and you're in full control." },
+        ].map((s, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            className="text-center"
+          >
+            <div className="text-5xl font-bold text-primary/20 mb-4">{s.n}</div>
+            <h3 className="font-semibold text-foreground mb-2">{s.title}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+/* ─── Page ─── */
 const AccessControl = () => {
-    const [step, setStep] = useState(0);
-    const [a, setA] = useState({ rooms: 0, ext: null as boolean | null, extN: 1, dbl: null as boolean | null, dblN: 1 });
-    const [pulse, setPulse] = useState(false);
-
-    const go = (upd = {}, skip = 1) => {
-        setA((p) => ({ ...p, ...upd }));
-        setPulse(true);
-        setTimeout(() => setPulse(false), 500);
-        setStep((s) => s + skip);
-    };
-
-    const r = a.rooms, extN = a.ext ? (a.extN || 0) : 0, dblN = a.dbl ? (a.dblN || 0) : 0;
-    const singles = Math.max(0, r - dblN);
-
-    const btn = (extra = {} as React.CSSProperties): React.CSSProperties => ({ background: "linear-gradient(135deg,#005db0,#0095e8)", color: "#fff", border: "none", borderRadius: "9px", padding: "11px 26px", fontSize: "14px", fontWeight: 600, cursor: "pointer", boxShadow: "0 4px 16px rgba(0,140,255,0.25)", ...extra });
-    const yesno: React.CSSProperties = { background: "rgba(0,200,255,0.06)", color: "#00ccff", border: "1px solid rgba(0,200,255,0.28)", borderRadius: "9px", padding: "11px 34px", fontSize: "14px", fontWeight: 600, cursor: "pointer" };
-    const circ: React.CSSProperties = { width: "40px", height: "40px", borderRadius: "50%", background: "rgba(0,200,255,0.09)", border: "1px solid rgba(0,200,255,0.28)", color: "#00ccff", fontSize: "22px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" };
-    const h2Style: React.CSSProperties = { color: "#d5ecff", fontSize: "17px", fontWeight: 600, marginBottom: "7px" };
-    const sub: React.CSSProperties = { color: "#4a6a88", fontSize: "12px", marginBottom: "20px" };
-
-    const Counter = ({ val, color = "#00ccff", field }: { val: number; color?: string; field: string }) => (
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "14px", margin: "18px 0 22px" }}>
-            <button onClick={() => setA((p) => ({ ...p, [field]: Math.max(1, (p as any)[field] - 1) }))} style={circ}>−</button>
-            <span style={{ fontSize: "46px", fontWeight: 700, color, fontFamily: "'Orbitron',monospace", minWidth: "64px", textAlign: "center" }}>{val}</span>
-            <button onClick={() => setA((p) => ({ ...p, [field]: (p as any)[field] + 1 }))} style={circ}>+</button>
-        </div>
-    );
-
-    const slides = [
-        <div key="w" style={{ textAlign: "center" }}>
-            <div style={{ marginBottom: "18px" }}><Person pulse={pulse} /></div>
-            <h2 style={{ color: "#00ccff", fontSize: "20px", marginBottom: "8px", fontFamily: "'Orbitron',monospace", letterSpacing: "0.05em" }}>Access Control Estimator</h2>
-            <p style={{ color: "#4a6a88", fontSize: "13px", maxWidth: "290px", margin: "0 auto 24px", lineHeight: 1.65 }}>Answer a few questions and we'll outline exactly what your facility needs.</p>
-            <button onClick={() => go()} style={btn()}>Get Started →</button>
-        </div>,
-
-        <div key="r" style={{ textAlign: "center" }}>
-            <div style={{ marginBottom: "14px" }}><Building rooms={r} /></div>
-            <h2 style={h2Style}>How many rooms need card readers?</h2>
-            <p style={sub}>Include every door that needs controlled access.</p>
-            <Counter val={r || 0} field="rooms" />
-            <button onClick={() => go()} disabled={r < 1} style={btn({ opacity: r < 1 ? 0.35 : 1 })}>Next →</button>
-        </div>,
-
-        <div key="e" style={{ textAlign: "center" }}>
-            <div style={{ marginBottom: "14px" }}><Building rooms={r} ext={0} /></div>
-            <h2 style={h2Style}>Are any doors external?</h2>
-            <p style={sub}>Doors that lead directly outside the building.</p>
-            <div style={{ display: "flex", gap: "14px", justifyContent: "center" }}>
-                <button onClick={() => go({ ext: true })} style={yesno}>Yes</button>
-                <button onClick={() => go({ ext: false, extN: 0 }, 2)} style={yesno}>No</button>
-            </div>
-        </div>,
-
-        <div key="en" style={{ textAlign: "center" }}>
-            <div style={{ marginBottom: "14px" }}><Building rooms={r} ext={a.extN} /></div>
-            <h2 style={h2Style}>How many external doors?</h2>
-            <p style={sub}>Enter the number that lead directly outside.</p>
-            <Counter val={a.extN} color="#ff6030" field="extN" />
-            <button onClick={() => go()} style={btn()}>Next →</button>
-        </div>,
-
-        <div key="d" style={{ textAlign: "center" }}>
-            <div style={{ display: "flex", gap: "24px", justifyContent: "center", marginBottom: "14px" }}>
-                <div style={{ textAlign: "center" }}>
-                    <svg viewBox="0 0 100 155" width="88" height="138">
-                        <rect x="10" y="8" width="80" height="140" rx="3" fill="#0b1e35" stroke="#1e5aaa" strokeWidth="2" />
-                        <rect x="14" y="12" width="72" height="132" rx="2" fill="#071222" />
-                        <rect x="5" y="62" width="9" height="26" rx="2" fill="#ff5a20" stroke="#ff7a45" strokeWidth="1" />
-                        <circle cx="84" cy="80" r="4" fill="#00ccff" opacity="0.9" />
-                    </svg>
-                    <div style={{ color: "#3a5870", fontSize: "10px", marginTop: "3px" }}>Single → Electric Strike</div>
-                </div>
-                <div style={{ textAlign: "center" }}>
-                    <svg viewBox="0 0 140 155" width="124" height="138">
-                        <rect x="8" y="8" width="57" height="140" rx="3" fill="#0b1e35" stroke="#1e5aaa" strokeWidth="2" />
-                        <rect x="75" y="8" width="57" height="140" rx="3" fill="#0b1e35" stroke="#1e5aaa" strokeWidth="2" />
-                        <line x1="70" y1="8" x2="70" y2="148" stroke="#00ccff" strokeWidth="1" strokeDasharray="5,4" opacity="0.35" />
-                        <rect x="3" y="58" width="8" height="18" rx="2" fill="#00ff80" opacity="0.85" />
-                        <rect x="129" y="58" width="8" height="18" rx="2" fill="#00ff80" opacity="0.85" />
-                        <text x="70" y="85" textAnchor="middle" fill="#00ccff" fontSize="9" fontFamily="monospace" opacity="0.6">MAG LOCK</text>
-                    </svg>
-                    <div style={{ color: "#3a5870", fontSize: "10px", marginTop: "3px" }}>Double → Mag Lock + REX</div>
-                </div>
-            </div>
-            <h2 style={h2Style}>Are any doors double doors?</h2>
-            <p style={sub}>Double doors need mag locks, motion sensors & REX sensors.</p>
-            <div style={{ display: "flex", gap: "14px", justifyContent: "center" }}>
-                <button onClick={() => go({ dbl: true })} style={yesno}>Yes</button>
-                <button onClick={() => go({ dbl: false, dblN: 0 }, 2)} style={yesno}>No</button>
-            </div>
-        </div>,
-
-        <div key="dn" style={{ textAlign: "center" }}>
-            <svg viewBox="0 0 140 155" width="124" height="138" style={{ marginBottom: "14px" }}>
-                <rect x="8" y="8" width="57" height="140" rx="3" fill="#0b1e35" stroke="#1e5aaa" strokeWidth="2" />
-                <rect x="75" y="8" width="57" height="140" rx="3" fill="#0b1e35" stroke="#1e5aaa" strokeWidth="2" />
-                <line x1="70" y1="8" x2="70" y2="148" stroke="#a78bfa" strokeWidth="1" strokeDasharray="5,4" opacity="0.5" />
-                <rect x="3" y="58" width="8" height="18" rx="2" fill="#00ff80" opacity="0.85" />
-                <rect x="129" y="58" width="8" height="18" rx="2" fill="#00ff80" opacity="0.85" />
-            </svg>
-            <h2 style={h2Style}>How many double doors?</h2>
-            <p style={sub}>Each set needs its own mag lock, motion sensor & REX.</p>
-            <Counter val={a.dblN} color="#a78bfa" field="dblN" />
-            <button onClick={() => go()} style={btn()}>See My Results →</button>
-        </div>,
-
-        <div key="s" style={{ textAlign: "left" }}>
-            <div style={{ textAlign: "center", marginBottom: "18px" }}>
-                <Building rooms={r} ext={extN} dbl={dblN} />
-                <h2 style={{ ...h2Style, textAlign: "center", marginTop: "12px" }}>Your Installation Needs</h2>
-                <div style={{ display: "flex", gap: "11px", justifyContent: "center", margin: "10px 0 16px", flexWrap: "wrap" }}>
-                    {[{ l: "Card Readers", v: r, c: "#00ccff" }, { l: "External Doors", v: extN, c: "#ff6030" }, { l: "Double Doors", v: dblN, c: "#a78bfa" }].map(({ l, v, c }) => (
-                        <div key={l} style={{ background: "rgba(255,255,255,0.035)", border: `1px solid ${c}38`, borderRadius: "8px", padding: "8px 14px", textAlign: "center" }}>
-                            <div style={{ color: c, fontSize: "22px", fontWeight: 700, fontFamily: "'Orbitron',monospace" }}>{v}</div>
-                            <div style={{ color: "#3a5870", fontSize: "10px" }}>{l}</div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-            <Row icon="🔌" hi={true} label={`Ethernet Wiring — ${r} run${r !== 1 ? "s" : ""}`} detail="Cat6 ethernet from server room to each door location for IP-based card reader communication." />
-            <Row icon="🪪" hi={true} label={`Card Readers & Cables — ${r} unit${r !== 1 ? "s" : ""}`} detail="ISONAS IP card readers with installation hardware and cables at each secured door." />
-            {singles > 0 && <Row icon="⚡" hi={false} label={`Electric Strikes — ${singles} unit${singles !== 1 ? "s" : ""}`} detail="Single doors require an electric strike for electronic locking and release." />}
-            {dblN > 0 && <Row icon="🔒" hi={false} label={`Mag Locks + Motion + REX — ${dblN} set${dblN !== 1 ? "s" : ""}`} detail="Double doors require magnetic locks, overhead motion sensors, and Request-to-Exit sensors on both sides." />}
-            <Row icon="☁️" hi={true} label={`ISONAS/Allegion Cloud License — ${r} reader${r !== 1 ? "s" : ""}`} detail="Annual per-reader cloud license. Includes mobile credentials, remote management, and full audit logs." />
-            <Row icon="🛠️" hi={false} label="Annual Maintenance Agreement (Optional)" detail="Covers preventive maintenance, firmware updates, and priority support. Not required but recommended." />
-            <div style={{ marginTop: "18px", padding: "14px", background: "rgba(0,200,255,0.045)", border: "1px solid rgba(0,200,255,0.16)", borderRadius: "10px", textAlign: "center" }}>
-                <p style={{ color: "#3a5870", fontSize: "11.5px", margin: "0 0 10px" }}>Ready for a formal quote based on your facility?</p>
-                <button style={btn({ width: "100%" })}>Request a Custom Quote</button>
-            </div>
-            <button onClick={() => { setStep(0); setA({ rooms: 0, ext: null, extN: 1, dbl: null, dblN: 1 }); }} style={{ width: "100%", marginTop: "8px", padding: "9px", background: "transparent", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "8px", color: "#3a5870", cursor: "pointer", fontSize: "12px" }}>
-                ← Start Over
-            </button>
-        </div>
-    ];
-
-    const cur = Math.min(step, slides.length - 1);
-    const prog = Math.min((step / (slides.length - 1)) * 100, 100);
-
-    return (
-        <div className="min-h-screen bg-background">
-            <Navbar />
-            <div style={{ minHeight: "100vh", background: "linear-gradient(155deg,#020b18 0%,#051120 55%,#030d1a 100%)", display: "flex", alignItems: "flex-start", justifyContent: "center", padding: "120px 16px 36px", fontFamily: "'Inter',-apple-system,sans-serif" }}>
-                <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-                <div style={{ position: "fixed", inset: 0, pointerEvents: "none", backgroundImage: "linear-gradient(rgba(0,170,255,0.022) 1px,transparent 1px),linear-gradient(90deg,rgba(0,170,255,0.022) 1px,transparent 1px)", backgroundSize: "44px 44px" }} />
-                <div style={{ width: "100%", maxWidth: "452px", background: "rgba(7,18,36,0.92)", border: "1px solid rgba(0,180,255,0.16)", borderRadius: "18px", padding: "26px 22px", backdropFilter: "blur(22px)", boxShadow: "0 28px 80px rgba(0,0,0,0.55),inset 0 1px 0 rgba(0,190,255,0.07)", position: "relative", zIndex: 1 }}>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "18px" }}>
-                        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                            <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#00ff80", boxShadow: "0 0 8px #00ff80" }} />
-                            <span style={{ color: "#3a6080", fontSize: "11px", fontFamily: "'Orbitron',monospace", letterSpacing: "0.1em" }}>ACCESS CONTROL</span>
-                        </div>
-                        <span style={{ color: "#1e3850", fontSize: "11px" }}>{step < slides.length - 1 ? `Step ${step + 1} of ${slides.length - 1}` : "Complete ✓"}</span>
-                    </div>
-                    <div style={{ height: "2px", background: "rgba(255,255,255,0.045)", borderRadius: "1px", marginBottom: "22px" }}>
-                        <div style={{ height: "100%", width: `${prog}%`, background: "linear-gradient(90deg,#0080cc,#00ff80)", borderRadius: "1px", transition: "width 0.4s ease" }} />
-                    </div>
-                    <div key={step} style={{ animation: "fi 0.32s ease", minHeight: "295px" }}>
-                        {slides[cur]}
-                    </div>
-                    <style>{`@keyframes fi{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}`}</style>
-                </div>
-            </div>
-            <Footer />
-        </div>
-    );
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <AccessControlHero />
+      <Estimator />
+      <HowItWorks />
+      <Footer />
+    </div>
+  );
 };
 
 export default AccessControl;
