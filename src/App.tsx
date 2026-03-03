@@ -8,6 +8,7 @@ import CaseStudies from "./pages/CaseStudies";
 import CaseStudyOakwood from "./pages/CaseStudyOakwood";
 import CaseStudyJenzabar from "./pages/CaseStudyJenzabar";
 import CaseStudyiPad from "./pages/CaseStudyiPad";
+import CaseStudyZoomRoom from "./pages/CaseStudyZoomRoom";
 import AccessControl from "./pages/AccessControl";
 import NotFound from "./pages/NotFound";
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/case-studies/oakwood-adventist-academy" element={<CaseStudyOakwood />} />
           <Route path="/case-studies/jenzabar-data-interface" element={<CaseStudyJenzabar />} />
           <Route path="/case-studies/ipad-classroom-scheduler" element={<CaseStudyiPad />} />
+          <Route path="/case-studies/alexa-zoom-room" element={<CaseStudyZoomRoom />} />
           <Route path="/access-control" element={<AccessControl />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
