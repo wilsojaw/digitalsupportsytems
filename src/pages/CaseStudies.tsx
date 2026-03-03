@@ -39,6 +39,7 @@ const caseStudies = [
     outcome: "Double-bookings eliminated. The campus experience, modernized.",
     tags: ["iPad", "Cloud Platform", "Campus Tech"],
     gradient: "from-emerald-500/20 to-teal-500/20",
+    slug: "/case-studies/ipad-classroom-scheduler",
   },
   {
     icon: Video,
